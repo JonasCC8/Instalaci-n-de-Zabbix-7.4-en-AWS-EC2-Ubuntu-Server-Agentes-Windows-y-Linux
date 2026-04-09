@@ -1,0 +1,1 @@
+# Instalaci-n-de-Zabbix-7.4-en-AWS-EC2-Ubuntu-Server-Agentes-Windows-y-Linux
