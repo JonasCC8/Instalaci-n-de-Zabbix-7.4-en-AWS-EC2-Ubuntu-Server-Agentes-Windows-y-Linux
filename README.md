@@ -17,19 +17,9 @@ Mostrar imagen
 🏗️ Arquitectura
 <br>
 ```
-Internet
-    │
-    ▼
-AWS EC2 (t3.medium)
-├── OS:       Ubuntu Server 22.04 LTS
-├── Zabbix:   7.4
-├── Database: MySQL 8.0
-├── Web:      Apache2 + PHP
-│
-├── Port 80/443   ← Web Interface
-├── Port 10051    ← Zabbix Server
-└── Port 10050    ← Zabbix Agent
-```
+<p align="center">
+  <img src="arquitectura-zabbix.png" alt="Arquitectura Zabbix" width="800"/>
+</p>
 <br>
 
 ☁️ 1. Crear Instancia en AWS EC2
@@ -66,12 +56,13 @@ Verify firewall status
 sudo ufw status
 
 <br>
-
+```
 ---
 
 ## 📦 5. Instalación de Zabbix 7.4
 
 <br>
+
 ```bash
 # Download Zabbix repository package
 wget https://repo.zabbix.com/zabbix/7.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.4-1+ubuntu22.04_all.deb
@@ -79,12 +70,11 @@ wget https://repo.zabbix.com/zabbix/7.4/ubuntu/pool/main/z/zabbix-release/zabbix
 # Install repository
 sudo dpkg -i zabbix-release_7.4-1+ubuntu22.04_all.deb
 
-# Update package list
-sudo apt update
+```
 <br>
-
 ⚙️ 6. Instalación de Componentes
 <br>
+
 ```bash
 sudo apt install \
     zabbix-server-mysql \
@@ -95,9 +85,9 @@ sudo apt install \
     mysql-server -y
 ```
 <br>
-
 🗄️ 7. Configuración de Base de Datos
 <br>
+
 Step 1 — Access MySQL:
 bashsudo mysql -uroot
 <br>
@@ -112,12 +102,11 @@ Step 3 — Import Zabbix schema:
 bashzcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
 <br>
 
-💡 Tip: Replace StrongPassword with a secure password of your choice.
-
 <br>
 
 🔧 8. Configuración de Zabbix Server
 <br>
+
 ```bash
 sudo nano /etc/zabbix/zabbix_server.conf
 ```
@@ -153,7 +142,7 @@ sudo systemctl status zabbix-agent
 sudo systemctl status apache2
 
 <br>
-
+```
 ---
 
 ## 🌍 11. Acceso Web
@@ -180,9 +169,10 @@ http://YOUR_PUBLIC_IP/zabbix
 
 ---
 
-## 🖥️ 12. Instalación de Agente Linux
+### 🖥️ 12. Instalación de Agente Linux
 
 <br>
+
 ```bash
 # Install agent
 sudo apt install zabbix-agent -y
@@ -203,10 +193,10 @@ Verify agent is running
 sudo systemctl status zabbix-agent
 
 <br>
-
+```
 ---
 
-## 🪟 13. Instalación de Agente Windows
+### 🪟 13. Instalación de Agente Windows
 
 <br>
 
@@ -227,18 +217,7 @@ cmdzabbix_agentd.exe --install
 zabbix_agentd.exe --start
 <br>
 
-🔍 14. Verificación
-<br>
-```bash
-# Test agent connectivity from Zabbix server
-zabbix_get -s AGENT_IP -k system.hostname
-Check Zabbix server logs
-sudo tail -f /var/log/zabbix/zabbix_server.log
-Check agent logs
-sudo tail -f /var/log/zabbix/zabbix_agentd.log
-
-<br>
-
+```
 ---
 
 ## ➕ 15. Agregar Hosts
@@ -261,7 +240,7 @@ Click: Add ✅
 
 ---
 
-## 🔐 Buenas Prácticas
+🔐 Buenas Prácticas
 
 <br>
 
@@ -278,35 +257,4 @@ Click: Add ✅
 
 ---
 
-## 📚 Referencias
 
-<br>
-
-- 📖 [Zabbix 7.4 Documentation](https://www.zabbix.com/documentation/7.4/)
-- 📖 [Zabbix Download](https://www.zabbix.com/download)
-- 📖 [AWS EC2 User Guide](https://docs.aws.amazon.com/ec2/)
-- 📖 [Ubuntu Server Guide](https://ubuntu.com/server/docs)
-
-<br>
-
----
-
-## 📄 Licencia
-
-<br>
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-<br>
-
----
-
-<div align="center">
-
-<br>
-
-**⭐ If this guide was helpful, give it a star! ⭐**
-
-<br>
-
-</div>
