@@ -2,13 +2,6 @@
 
 Complete guide to deploy Zabbix 7.4 monitoring server on AWS EC2 with MySQL, Apache, and agent configuration for Linux and Windows hosts.
 
-<br>
-Mostrar imagen
-Mostrar imagen
-Mostrar imagen
-Mostrar imagen
-<br>
-
 🏗️ Arquitectura
 
 <p align="center">
