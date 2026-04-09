@@ -1,4 +1,4 @@
-📊 Zabbix 7.4 — AWS EC2 Installation Guide (Ubuntu Server)
+# 📊 Instalación de Zabbix 7.4 en AWS EC2 (Ubuntu Server)
 
 Complete guide to deploy Zabbix 7.4 monitoring server on AWS EC2 with MySQL, Apache, and agent configuration for Linux and Windows hosts.
 
@@ -9,25 +9,18 @@ Mostrar imagen
 Mostrar imagen
 <br>
 
-📋 Tabla de Contenidos
-<br>
-#Section1Arquitectura2Crear Instancia EC23Security Group4Conexión SSH5Hardening6Instalación Zabbix7Componentes8Base de Datos9Zabbix Server Config10Zona Horaria11Inicio de Servicios12Acceso Web13Agente Linux14Agente Windows15Verificación16Agregar Hosts17Buenas Prácticas
-<br>
-
 🏗️ Arquitectura
-<br>
-```
+
 <p align="center">
   <img src="arquitectura-zabbix.png" alt="Arquitectura Zabbix" width="800"/>
 </p>
-<br>
 
-☁️ 1. Crear Instancia en AWS EC2
+# ☁️ 1. Crear Instancia en AWS EC2
 <br>
 FieldValueInstance typet3.mediumAMIUbuntu Server 22.04 LTSStorageMinimum 20 GBKey pairCreate or select existing
 <br>
 
-🔐 2. Configurar Security Group
+# 🔐 2. Configurar Security Group
 <br>
 TypeProtocolPortSourceSSHTCP22My IPHTTPTCP800.0.0.0/0HTTPSTCP4430.0.0.0/0Zabbix ServerTCP100510.0.0.0/0Zabbix AgentTCP100500.0.0.0/0
 <br>
@@ -36,15 +29,17 @@ TypeProtocolPortSourceSSHTCP22My IPHTTPTCP800.0.0.0/0HTTPSTCP4430.0.0.0/0Zabbix 
 
 <br>
 
-🖥️ 3. Conexión al Servidor
+# 🖥️ 3. Conexión al Servidor
 <br>
+
 ```bash
 ssh -i tu-key.pem ubuntu@YOUR_PUBLIC_IP
 ```
 <br>
 
-🛡️ 4. Hardening Básico
+# 🛡️ 4. Hardening Básico
 <br>
+
 ```bash
 # Update system packages
 sudo apt update && sudo apt upgrade -y
@@ -59,7 +54,7 @@ sudo ufw status
 ```
 ---
 
-## 📦 5. Instalación de Zabbix 7.4
+# 📦 5. Instalación de Zabbix 7.4
 
 <br>
 
@@ -72,20 +67,17 @@ sudo dpkg -i zabbix-release_7.4-1+ubuntu22.04_all.deb
 
 ```
 <br>
-⚙️ 6. Instalación de Componentes
-<br>
+
+# ⚙️ 6. Instalación de Componentes
+---
 
 ```bash
-sudo apt install \
-    zabbix-server-mysql \
-    zabbix-frontend-php \
-    zabbix-apache-conf \
-    zabbix-sql-scripts \
-    zabbix-agent \
-    mysql-server -y
+sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent mysql-server -y
 ```
 <br>
-🗄️ 7. Configuración de Base de Datos
+
+# 🗄️ 7. Configuración de Base de Datos
+<br>
 <br>
 
 Step 1 — Access MySQL:
@@ -104,7 +96,7 @@ bashzcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p z
 
 <br>
 
-🔧 8. Configuración de Zabbix Server
+# 🔧 8. Configuración de Zabbix Server
 <br>
 
 ```bash
@@ -115,8 +107,9 @@ Add or update the following line:
 iniDBPassword=StrongPassword
 <br>
 
-🌐 9. Configuración de Zona Horaria
+# 🌐 9. Configuración de Zona Horaria
 <br>
+
 ```bash
 sudo nano /etc/zabbix/apache.conf
 ```
@@ -129,8 +122,9 @@ iniphp_value date.timezone America/Mexico_City
 
 <br>
 
-▶️ 10. Inicio de Servicios
+# ▶️ 10. Inicio de Servicios
 <br>
+
 ```bash
 # Restart all services
 sudo systemctl restart zabbix-server zabbix-agent apache2
@@ -145,7 +139,7 @@ sudo systemctl status apache2
 ```
 ---
 
-## 🌍 11. Acceso Web
+# 🌍 11. Acceso Web
 
 <br>
 
@@ -169,7 +163,7 @@ http://YOUR_PUBLIC_IP/zabbix
 
 ---
 
-### 🖥️ 12. Instalación de Agente Linux
+# 🖥️ 12. Instalación de Agente Linux
 
 <br>
 
@@ -196,7 +190,7 @@ sudo systemctl status zabbix-agent
 ```
 ---
 
-### 🪟 13. Instalación de Agente Windows
+# 🪟 13. Instalación de Agente Windows
 
 <br>
 
@@ -220,7 +214,7 @@ zabbix_agentd.exe --start
 ```
 ---
 
-## ➕ 15. Agregar Hosts
+# ➕ 14. Agregar Hosts
 
 <br>
 
@@ -240,7 +234,7 @@ Click: Add ✅
 
 ---
 
-🔐 Buenas Prácticas
+# 🔐 Buenas Prácticas
 
 <br>
 
